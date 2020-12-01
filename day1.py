@@ -20,17 +20,14 @@ def part2():
     return both(3)
 
 
-def totime():
-    part1()
-    part2()
-
-
 if __name__ == "__main__":
     result = part1()
     print("Day1_Part1: found tuple: {} that multiplies to: {}".format(result[0], result[1]))
     result = part2()
     print("Day1_Part2: found tuple: {} that multiplies to: {}".format(result[0], result[1]))
 
-    # t = timeit.Timer(totime)
-    # print(t.timeit(number=100)/100)
-    # Note: produces a value of 0.194.... on my machine for day1 and day2 together.
+    # timing part2 without IO
+    with read_list_ints("data/day1_input.txt") as intlist:
+        t = timeit.Timer('find_inputs_that_sumto(intlist, 2020, 3)', globals=globals())
+        n = 100
+        print(sum(t.repeat(repeat=n, number=1)) / n)
