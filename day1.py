@@ -5,6 +5,7 @@ from readers.read_lists import read_list_ints
 from core.findsum import find_inputs_that_sumto
 import math
 
+
 def both(number_of_inputs:int = 2):
     with read_list_ints("data/day1_input.txt") as intlist:
         sumto = find_inputs_that_sumto(intlist, 2020, number_of_inputs)
