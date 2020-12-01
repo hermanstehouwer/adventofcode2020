@@ -27,7 +27,9 @@ if __name__ == "__main__":
     print("Day1_Part2: found tuple: {} that multiplies to: {}".format(result[0], result[1]))
 
     # timing part2 without IO
-    with read_list_ints("data/day1_input.txt") as intlist:
-        t = timeit.Timer('find_inputs_that_sumto(intlist, 2020, 3)', globals=globals())
-        n = 100
-        print(sum(t.repeat(repeat=n, number=1)) / n)
+    with read_list_ints("data/day1_input_boudewijn.txt") as intlist:
+        iterations = 100
+        t = timeit.Timer(stmt='find_inputs_that_sumto(intlist, 2020, 3)', globals=globals())
+        performance_result_ms = t.timeit(number=iterations) / iterations * 1000
+        print(f'{performance_result_ms=}ms')
+
