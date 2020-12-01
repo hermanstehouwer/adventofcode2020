@@ -8,8 +8,8 @@ import math
 
 def both(number_of_inputs:int = 2):
     with read_list_ints("data/day1_input.txt") as intlist:
-        sumto = find_inputs_that_sumto(intlist, 2020, number_of_inputs)
-        return sumto, math.prod(sumto)
+        result = find_inputs_that_sumto(intlist, 2020, number_of_inputs)
+        return result, math.prod(result)
 
 
 def part1():
