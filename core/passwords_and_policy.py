@@ -20,15 +20,9 @@ class PasswordPolicy(ABC):
 class SledRentalPolicy(PasswordPolicy, ABC):
     def check_password_against_policy(self, password: str) -> bool:
         count = password.count(self.letter)
-        if count < self.min or count > self.max:
-            return False
-        return True
+        return self.min <= count <= self.max
 
 
 class OfficialTobogganPolicy(PasswordPolicy, ABC):
     def check_password_against_policy(self, password: str) -> bool:
-        hitcount = 0
-        for check_index in [self.min, self.max]:
-            if len(password) >= check_index and password[check_index-1] == self.letter:
-                hitcount += 1
-        return hitcount == 1
+        return (password[self.min-1] == self.letter) ^ (password[self.max-1] == self.letter)
