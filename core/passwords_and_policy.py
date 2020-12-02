@@ -25,4 +25,7 @@ class SledRentalPolicy(PasswordPolicy, ABC):
 
 class OfficialTobogganPolicy(PasswordPolicy, ABC):
     def check_password_against_policy(self, password: str) -> bool:
-        return (password[self.min-1] == self.letter) ^ (password[self.max-1] == self.letter)
+        # using bitwise xor, which works fine on booleans (or on 0/1 valued ints)
+        return (password[self.min-1] == self.letter) \
+               ^ \
+               (password[self.max-1] == self.letter)
