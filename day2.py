@@ -1,23 +1,21 @@
 #!/usr/bin/env python3.8
+from typing import List
 
 from readers.read_lists import read_policystring_password
-from core.passwords_and_policy import SledRentalPolicy, OfficialTobogganPolicy
+from core.passwords_and_policy import SledRentalPolicy, OfficialTobogganPolicy, PasswordPolicy
+
+
+def generate_for_passwordpolicy(policy: PasswordPolicy.__class__) -> List[bool]:
+    for (policy_str, password_str) in read_policystring_password("data/day2_input.txt"):
+        yield policy(policy_str).check_password_against_policy(password_str)
 
 
 def part1():
-    counter = 0
-    for (policy_str, password_str) in read_policystring_password("data/day2_input.txt"):
-        if SledRentalPolicy(policy_str).check_password_against_policy(password_str):
-            counter += 1
-    return counter
+    return sum(generate_for_passwordpolicy(SledRentalPolicy))
 
 
 def part2():
-    counter = 0
-    for (policy_str, password_str) in read_policystring_password("data/day2_input.txt"):
-        if OfficialTobogganPolicy(policy_str).check_password_against_policy(password_str):
-            counter += 1
-    return counter
+    return sum(generate_for_passwordpolicy(OfficialTobogganPolicy))
 
 
 if __name__ == "__main__":
