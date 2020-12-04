@@ -57,7 +57,6 @@ def test_invalid_passports(invalid_passports):
 
 def test_valid_passports(valid_passports):
     for passport in valid_passports():
-        print(passport.fields)
         assert passport.validate(ignore="cid", validate_values=True)
 
 
@@ -65,60 +64,30 @@ def test_one_valid(one_valid_passport):
     assert one_valid_passport.validate(ignore="cid", validate_values=True)
 
 
-@pytest.mark.parametrize("byr, expected", [
-    pytest.param("2002", True),
-    pytest.param("2003", False),
-    pytest.param("1976", True)
+@pytest.mark.parametrize("function, field_value, expected", [
+    # Birthyear
+    pytest.param("byr", "2002", True),
+    pytest.param("byr", "2003", False),
+    pytest.param("byr", "1976", True),
+    # Height
+    pytest.param("hgt", "60in", True),
+    pytest.param("hgt", "190cm", True),
+    pytest.param("hgt", "190in", False),
+    pytest.param("hgt", "190", False),
+    pytest.param("hgt", "185cm", True),
+    # Hair Colour
+    pytest.param("hcl", "#123abc", True),
+    pytest.param("hcl", "#123abz", False),
+    pytest.param("hcl", "123abc", False),
+    pytest.param("hcl", "#866857", True),
+    # Eye Colour
+    pytest.param("ecl", "brn", True),
+    pytest.param("ecl", "wat", False),
+    pytest.param("ecl", "gry", True),
+    # PID
+    pytest.param("pid", "000000001", True),
+    pytest.param("pid", "0123456789", False),
+    pytest.param("pid", "760899887", True)
 ])
-def test_byr(one_valid_passport, byr, expected):
-    one_valid_passport.fields["byr"] = byr
-    print(one_valid_passport.validate(ignore="cid", validate_values=True))
-    assert one_valid_passport.validate(ignore="cid", validate_values=True) == expected
-
-
-@pytest.mark.parametrize("hgt, expected", [
-    pytest.param("60in", True),
-    pytest.param("190cm", True),
-    pytest.param("190in", False),
-    pytest.param("190", False),
-    pytest.param("185cm", True)
-
-])
-def test_hgt(one_valid_passport, hgt, expected):
-    one_valid_passport.fields["hgt"] = hgt
-    assert one_valid_passport.validate(ignore="cid", validate_values=True) == expected
-
-
-@pytest.mark.parametrize("hcl, expected", [
-    pytest.param("#123abc", True),
-    pytest.param("#123abz", False),
-    pytest.param("123abc", False),
-    pytest.param("#866857", True)
-
-])
-def test_hgt(one_valid_passport, hcl, expected):
-    one_valid_passport.fields["hcl"] = hcl
-    assert one_valid_passport.validate(ignore="cid", validate_values=True) == expected
-
-
-@pytest.mark.parametrize("ecl, expected", [
-    pytest.param("brn", True),
-    pytest.param("wat", False),
-    pytest.param("gry", True)
-])
-def test_ecl(one_valid_passport, ecl, expected):
-    one_valid_passport.fields["ecl"] = ecl
-    assert one_valid_passport.validate(ignore="cid", validate_values=True) == expected
-
-
-@pytest.mark.parametrize("pid, expected", [
-    pytest.param("000000001", True),
-    pytest.param("0123456789", False),
-    pytest.param("760899887", True)
-
-])
-def test_brn(one_valid_passport, pid, expected):
-    one_valid_passport.fields["pid"] = pid
-    assert one_valid_passport.validate(ignore="cid", validate_values=True) == expected
-
-
+def test_validators(function, field_value, expected):
+    assert getattr(PassportValidator, function)(field_value) == expected
