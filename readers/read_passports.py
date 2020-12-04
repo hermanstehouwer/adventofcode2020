@@ -10,15 +10,6 @@ def passport_from_line(line: str) -> Passport:
 
 
 def make_passports(filename: str) -> Iterable[Passport]:
-    passports = []
-    passport_lines = []
     with open(filename) as f:
-        while line := f.readline():
-            line = line.rstrip()
-            if line == "":
-                yield passport_from_line(" ".join(passport_lines))
-                passport_lines = []
-            else:
-                passport_lines.append(line)
-    # last line of the file is not empty
-    yield passport_from_line(" ".join(passport_lines))
+        for passport in f.read().split("\n\n"):
+            yield passport_from_line(" ".join(passport.split("\n")))
