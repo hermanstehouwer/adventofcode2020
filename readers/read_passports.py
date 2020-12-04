@@ -1,18 +1,15 @@
 from typing import Iterable
 
-from core.passport import PassPort
+from core.passport import Passport
 
 
-def passport_from_line(line: str) -> PassPort:
-    passport = PassPort()
-    passport.fields = {}
-    for item in line.split(" "):
-        key, value = item.split(":")
-        passport.fields[key] = value
+def passport_from_line(line: str) -> Passport:
+    passport = Passport()
+    passport.fields = dict([field.split(":") for field in line.split()])
     return passport
 
 
-def make_passports(filename: str) -> Iterable[PassPort]:
+def make_passports(filename: str) -> Iterable[Passport]:
     passports = []
     passport_lines = []
     with open(filename) as f:
