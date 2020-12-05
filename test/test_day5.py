@@ -8,4 +8,4 @@ from core.airplaine_seats import *
     pytest.param("BBFFBBFRLL", 820),
 ])
 def test_validators(boardingpass, expected):
-    assert Seat(boardingpass).get_ID() == expected
+    assert Seat(boardingpass).ID == expected
