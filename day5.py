@@ -7,7 +7,7 @@ from readers.generic import read_and_rstrip
 
 def get_seat_IDs() -> List[int]:
     return [Seat(boarding_pass).ID
-                for boarding_pass in read_and_rstrip("data/day5_input.txt")]
+            for boarding_pass in read_and_rstrip("data/day5_input.txt")]
 
 
 def part1() -> int:
