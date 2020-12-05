@@ -9,10 +9,12 @@ def part1():
 
 
 def part2():
-    l = [Seat(boarding_pass).get_ID()
+    seats = [Seat(boarding_pass).get_ID()
                 for boarding_pass in read_and_rstrip("data/day5_input.txt")]
-    l.sort()
-    return list(set(range(min(l), max(l))).difference(l))[0]
+    return [seat_id
+            for seat_id in range(min(seats), max(seats))
+            if seat_id not in seats
+            ].pop()
 
 
 if __name__ == "__main__":
