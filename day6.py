@@ -9,11 +9,9 @@ def part1() -> int:
 
 
 def part2() -> int:
-    sum = 0
-    for group in yield_blocks("data/day6_input.txt"):
-        sets = [set(x) for x in group.split("\n")]
-        sum += len(set.intersection(*sets))
-    return sum
+    return sum([len(set.intersection(*[set(x) for x in group.split("\n")]))
+                for group in yield_blocks("data/day6_input.txt")
+                ])
 
 
 if __name__ == "__main__":
