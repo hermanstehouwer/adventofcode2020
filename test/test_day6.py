@@ -13,5 +13,5 @@ def test_part2():
     sum = 0
     for group in yield_blocks("data/day6_test.txt"):
         sets = [set(x) for x in group.split("\n")]
-        sum += len(sets[0].intersection(*sets))
+        sum += len(set.intersection(*sets))
     assert sum == 6

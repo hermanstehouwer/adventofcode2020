@@ -12,7 +12,7 @@ def part2() -> int:
     sum = 0
     for group in yield_blocks("data/day6_input.txt"):
         sets = [set(x) for x in group.split("\n")]
-        sum += len(sets[0].intersection(*sets))
+        sum += len(set.intersection(*sets))
     return sum
 
 
