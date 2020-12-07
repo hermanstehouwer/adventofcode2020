@@ -1,6 +1,6 @@
 from pytest import fixture
 
-from core.bagtree import BagTree
+from core.bagtree import BagTree, BagTree2
 
 
 @fixture
@@ -34,10 +34,22 @@ def test_part1(example_rules):
         bt.add_bags_from_line(rule)
     sires = bt.get_list_of_parents("shiny gold")
     assert len(sires) == 4
+    bt = BagTree2()
+    for rule in example_rules:
+        bt.add_bags_from_line(rule)
+    sires = bt.get_list_of_parents("shiny gold")
+    print(sires)
+    assert len(sires) == 4
 
 
 def test_part2(example_rules2):
     bt = BagTree()
     for rule in example_rules2:
         bt.add_bags_from_line(rule)
+    assert bt.count_number_of_children("shiny gold") == 126
+    bt = BagTree2()
+    for rule in example_rules2:
+        bt.add_bags_from_line(rule)
+    print(bt.G.nodes)
+    print(bt.G.edges)
     assert bt.count_number_of_children("shiny gold") == 126
