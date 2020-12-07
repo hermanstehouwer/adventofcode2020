@@ -33,7 +33,6 @@ def test_part1(example_rules):
     for rule in example_rules:
         bt.add_bags_from_line(rule)
     sires = bt.get_list_of_parents("shiny gold")
-    print(sires)
     assert len(sires) == 4
 
 
@@ -41,4 +40,4 @@ def test_part2(example_rules2):
     bt = BagTree()
     for rule in example_rules2:
         bt.add_bags_from_line(rule)
-    assert bt.count_number_of_children("shiny gold") -1 == 126
+    assert bt.count_number_of_children("shiny gold") == 126
