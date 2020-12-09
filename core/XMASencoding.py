@@ -5,12 +5,7 @@ from typing import List
 def find_first_number_not_summed_from_preamble(data: List[int], preamble_size=25) -> int:
     for index in range(preamble_size, len(data)):
         preamble = data[index-preamble_size: index]
-        found = False
-        for combo in itertools.combinations(preamble, 2):
-            if sum(combo) == data[index]:
-                found = True
-                break
-        if not found:
+        if data[index] not in [sum(combo) for combo in itertools.combinations(preamble, 2)]:
             return data[index]
     return -1
 
