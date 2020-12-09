@@ -18,9 +18,12 @@ def find_first_number_not_summed_from_preamble(data: List[int], preamble_size=25
 def find_contiguous_set_for_sum(data: List[int], target_number: int) -> List[int]:
     from_idx = 0
     to_idx = 2
-    while (current_sum := sum(data[from_idx: to_idx])) != target_number:
+    current_sum = sum(data[from_idx: to_idx])
+    while current_sum != target_number:
         if current_sum > target_number:
+            current_sum -= data[from_idx]
             from_idx += 1
         else:
+            current_sum += data[to_idx]
             to_idx += 1
     return data[from_idx: to_idx]

@@ -26,7 +26,7 @@ if __name__ == "__main__":
     #t = timeit.Timer(stmt='find_first_number_not_summed_from_preamble(data, preamble_size=25)', globals=globals())
     #performance_result_ms = t.timeit(number=iterations) / iterations * 1000
     #print(f'{performance_result_ms=}ms')
-    #
+
     #t = timeit.Timer(stmt='find_contiguous_set_for_sum(data, 1721308972)', globals=globals())
     #performance_result_ms = t.timeit(number=iterations) / iterations * 1000
     #print(f'{performance_result_ms=}ms')
