@@ -42,7 +42,6 @@ def get_coordinates(directions: Iterable[str]) -> Iterable[Tuple[int, int]]:
 
 
 def rotate_wp(WP: Tuple[int, int], amount: int) -> Tuple[int, int]:
-    print(f"Rotating {WP} {amount}degrees right: ")
     if amount == 90:
         WP = WP[1], -WP[0]
     elif amount == 180:
@@ -51,7 +50,6 @@ def rotate_wp(WP: Tuple[int, int], amount: int) -> Tuple[int, int]:
         WP = -WP[1], WP[0]
     else:
         raise ValueError(f"INVALID AMOUNT: {amount}")
-    print(f"Result: {WP}")
     return WP
 
 
@@ -73,10 +71,8 @@ def get_coordinates2(directions: Iterable[str]) -> Iterable[Tuple[int, int]]:
             C = (C[0] + WP[0]*amount, C[1] + WP[1]*amount)
             yield C
         elif direction == "R":
-            print(f"{d}")
             WP = rotate_wp(WP, amount)
         elif direction == "L":
-            print(f"{d}")
             WP = rotate_wp(WP, 360 - amount)
         else:
             raise ValueError(d)
