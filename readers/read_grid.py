@@ -7,6 +7,8 @@ from core.Grid import *
 def getGridItem(c: str) -> GridItem:
     if c == ".":
         return GridItem.EMPTY
+    if c == "L":
+        return GridItem.SEAT
     return GridItem.TREE
 
 
