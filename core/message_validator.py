@@ -2,7 +2,6 @@ import copy
 from typing import Dict, Iterable, List, Tuple, Set
 from pyformlang.cfg import Production, Variable, Terminal, CFG, Epsilon
 
-
 class RuleSet:
     rules: CFG
 

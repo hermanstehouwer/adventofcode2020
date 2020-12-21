@@ -3,6 +3,7 @@ from typing import Tuple, Iterable
 
 from core.message_validator import RuleSet
 from readers.generic import yield_blocks
+import regex
 
 
 def get_stuff(patch: bool = False) -> Tuple[RuleSet, Iterable[str]]:
@@ -26,4 +27,3 @@ if __name__ == "__main__":
     print("Day19_Part1: found count: {}".format(part1()))
 
     print("Day19_Part2: found count: {}".format(part2()))
-
